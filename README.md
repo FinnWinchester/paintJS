@@ -11,10 +11,10 @@
 
 ## Testing
 
-1. Install Jest globally `npm install --save-dev jest`
-2. Clone this repo `git clone https://github.com/FinnWinchester/paintJS.git`
-3. `cd paintJS`
-4. Install dependencies `npm install`
+1. Clone this repo `git clone https://github.com/FinnWinchester/paintJS.git`
+2. `cd paintJS`
+3. Install dependencies `npm install`
+4. Now we have [Jest](https://facebook.github.io/jest/) installed
 5. Run `npm test`
 
 ## Getting started
