@@ -6,12 +6,16 @@ class CanvasComponent extends React.Component {
     super(props);
     this.state = {
       canvas: false,
-      ctx: false
+      ctx: false,
+      width: props.width,
+      height: props.width
     };
   }
 
   componentWillReceiveProps(nextProps, nextState) {
     // Here we get the new props 'color' and 'width'.
+    let _state = this.state;
+
     this.state.ctx.lineWidth = nextProps.selected_width;
     this.state.ctx.strokeStyle = nextProps.selected_color;
   }
@@ -24,6 +28,7 @@ class CanvasComponent extends React.Component {
       x: 0,
       y: 0
     };
+    let painting = true;
 
     let canvas_wrapper = document.getElementById('canvas_wrapper');
     let paint_style = getComputedStyle(canvas_wrapper);
@@ -35,8 +40,11 @@ class CanvasComponent extends React.Component {
     _state.ctx = _state.canvas.getContext('2d');
 
     let onPaint = function() {
-      _state.ctx.lineTo(mouse.x, mouse.y);
-      _state.ctx.stroke();
+      if (painting) {
+        _state.ctx.lineTo(mouse.x, mouse.y);
+        _state.ctx.stroke();
+        coords.push(Object.assign({}, mouse));
+      }
     };
 
     _state.canvas.addEventListener('mousemove', function(e) {
@@ -51,6 +59,7 @@ class CanvasComponent extends React.Component {
 
     // Start drawing
     _state.canvas.addEventListener('mousedown', function(e) {
+      painting = true;
       coords = [];
       _state.ctx.beginPath();
       _state.ctx.moveTo(mouse.x, mouse.y);
@@ -60,7 +69,9 @@ class CanvasComponent extends React.Component {
 
     // Finish drawing
     _state.canvas.addEventListener('mouseup', function() {
-      // _props.storeDrawing(_state.coords);
+      painting = false;
+      let hasCoords = coords.length > 0;
+      hasCoords && _props.storeDrawing(coords, _state.ctx.strokeStyle);
       _state.canvas.removeEventListener('mousemove', onPaint, false);
     }, false);
   }
@@ -85,12 +96,18 @@ CanvasComponent.defaultProps = {
 };
 
 const mapStateToProps = state => {
-  return {selected_color: state.canvas.config.selected_color, selected_width: state.canvas.config.selected_width};
+  return {selected_color: state.canvas.config.selected_color, selected_width: state.canvas.config.selected_width, history: state.canvas.config.history};
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    storeDrawing: coords => dispatch({type: 'CANVAS_DRAWING_STORE', data: coords})
+    storeDrawing: (coords, color) => dispatch({
+      type: 'CANVAS_DRAWING_STORE',
+      data: {
+        coords,
+        color
+      }
+    })
   };
 }
 

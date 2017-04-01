@@ -21,7 +21,9 @@ store.dispatch({
     'canvas': {
       'config': {
         'selected_color': '#000000',
-        'selected_width': 1
+        'selected_width': 1,
+        'history': [],
+        'deleted': []
       },
       'tools': {
         'colors': [

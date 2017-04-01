@@ -10,65 +10,75 @@ class CanvasToolsComponent extends React.Component {
     let props = this.props;
 
     return (
-      <div className='canvas-tools-wrapper'>
-        <div className='colors'>
-          {props.tools.colors.map(e => {
-            let style = {
-              backgroundColor: e
-            };
-
-            let selectCanvasColor = function() {
-              props.selectColor(e);
-            };
-
-            let selected = props.selected_color === e;
-
-            return (
-              <div className='color-preview-wrapper' key={e} onClick={selectCanvasColor}>
-                <div className='color-preview' style={style}>
-                  {selected && <div className='inner-icon valign-wrapper' dangerouslySetInnerHTML={{__html: '<i class="fa fa-check valign"></i>'}}></div>}
-                </div>
-              </div>
-            )
-          })}
-          <br className='clear-fix'/>
+      <div>
+        <div className='canvas-undo-redo-wrapper'>
+          <button type='button' onClick={this.props.undo}>Undo</button>
+          <button type='button' onClick={this.props.redo}>Redo</button>
         </div>
-
-        <div className='widths'>
-          <div className='widths-list'>
-            {props.tools.widths.map(e => {
+        <div className='canvas-tools-wrapper'>
+          <div className='colors'>
+            {props.tools.colors.map(e => {
               let style = {
-                height: e
+                backgroundColor: e
               };
 
-              let selectCanvasWidth = function() {
-                props.selectWidth(e);
+              let selectCanvasColor = function() {
+                props.selectColor(e);
               };
+
+              let selected = props.selected_color === e;
 
               return (
-                <div className='width-preview-wrapper valign-wrapper' key={e} onClick={selectCanvasWidth}>
-                  <div className='width-preview valign' style={style}></div>
+                <div className='color-preview-wrapper' key={e} onClick={selectCanvasColor}>
+                  <div className='color-preview' style={style}>
+                    {selected && <div className='inner-icon valign-wrapper' dangerouslySetInnerHTML={{
+                      __html: '<i class="fa fa-check valign"></i>'
+                    }}></div>}
+                  </div>
                 </div>
               )
             })}
             <br className='clear-fix'/>
           </div>
 
-          <div className='widths-selected'>
-            {props.tools.widths.map(e => {
-              let style = {
-                height: e
-              };
+          <div className='widths'>
+            <div className='widths-list'>
+              {props.tools.widths.map(e => {
+                let style = {
+                  height: e
+                };
 
-              let selected = props.selected_width === e;
+                let selectCanvasWidth = function() {
+                  props.selectWidth(e);
+                };
 
-              return (
-                <div className={'bullet' + (selected ? ' selected' : '')} key={e}></div>
-              )
-            })}
+                return (
+                  <div className='width-preview-wrapper valign-wrapper' key={e} onClick={selectCanvasWidth}>
+                    <div className='width-preview valign' style={style}></div>
+                  </div>
+                )
+              })}
+              <br className='clear-fix'/>
+            </div>
+
+            <div className='widths-selected'>
+              {props.tools.widths.map(e => {
+                let style = {
+                  height: e
+                };
+
+                let selected = props.selected_width === e;
+
+                return (
+                  <div className={'bullet' + (selected
+                    ? ' selected'
+                    : '')} key={e}></div>
+                )
+              })}
+              <br className='clear-fix'/>
+            </div>
             <br className='clear-fix'/>
           </div>
-          <br className='clear-fix'/>
         </div>
       </div>
     );
@@ -92,7 +102,9 @@ const mapDispatchToProps = dispatch => {
       data: {
         color: color
       }
-    })
+    }),
+    undo: color => dispatch({type: 'CANVAS_DRAWING_UNDO', data: {}}),
+    redo: color => dispatch({type: 'CANVAS_DRAWING_REDO', data: {}})
   };
 }
 
