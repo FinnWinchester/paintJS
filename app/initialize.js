@@ -20,7 +20,7 @@ store.dispatch({
   data: {
     'canvas': {
       'config': {
-        'selected_color': 'black',
+        'selected_color': '#000000',
         'selected_width': 1
       },
       'tools': {
