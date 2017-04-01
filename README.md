@@ -7,9 +7,16 @@
 1. Install brunch globally `npm install -g brunch`
 2. Clone this repo `git clone https://github.com/FinnWinchester/paintJS.git`
 3. `cd paintJS`
-4. Install dependencies `npm install`
+5. Install dependencies `npm install`
 4. Run `npm start`
 6. Browse to [http://localhost:3333/](http://localhost:3333/)
+
+## Testing
+
+1. Clone this repo `git clone https://github.com/FinnWinchester/paintJS.git`
+2. `cd paintJS`
+3. Install dependencies `npm install`
+4. Run `npm test`
 
 ## Getting started
 
