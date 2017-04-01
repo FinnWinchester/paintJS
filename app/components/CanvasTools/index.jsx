@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {connect} from 'react-redux';
 
@@ -12,8 +13,12 @@ class CanvasToolsComponent extends React.Component {
     return (
       <div>
         <div className='canvas-undo-redo-wrapper'>
-          <button type='button' onClick={this.props.undo}>Undo</button>
-          <button type='button' onClick={this.props.redo}>Redo</button>
+          <button type='button' className={'undo-btn' + (props.history_length === 0 ? ' disabled' : '')} onClick={this.props.undo}>
+            <i className='fa fa-undo'></i>
+          </button>
+          <button type='button' className={'redo-btn' + (props.deleted_length === 0 ? ' disabled' : '')} onClick={this.props.redo}>
+            <i className='fa fa-repeat'></i>
+          </button>
         </div>
         <div className='canvas-tools-wrapper'>
           <div className='colors'>
@@ -86,7 +91,7 @@ class CanvasToolsComponent extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {tools: state.canvas.tools, selected_color: state.canvas.config.selected_color, selected_width: state.canvas.config.selected_width};
+  return {tools: state.canvas.tools, selected_color: state.canvas.config.selected_color, selected_width: state.canvas.config.selected_width, history_length: state.canvas.config.history.length, deleted_length: state.canvas.config.deleted.length};
 };
 
 const mapDispatchToProps = dispatch => {

@@ -118,8 +118,8 @@ CanvasComponent.defaultProps = {
 };
 
 const mapStateToProps = state => {
-  // unique_id is needed because the new state's history won't hear about his length change.
-  return {selected_color: state.canvas.config.selected_color, selected_width: state.canvas.config.selected_width, history: state.canvas.config.history, repaint: state.canvas.repaint, unique_id: state.canvas.config.history.length};
+  // history_length is needed because the new state's history won't hear about his length change.
+  return {selected_color: state.canvas.config.selected_color, selected_width: state.canvas.config.selected_width, history: state.canvas.config.history, repaint: state.canvas.repaint, history_length: state.canvas.config.history.length};
 };
 
 const mapDispatchToProps = dispatch => {
