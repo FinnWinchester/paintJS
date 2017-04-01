@@ -1,5 +1,5 @@
 import React from 'react';
-import {Canvas, PanelHeader} from 'components';
+import {Canvas, CanvasTools, PanelHeader} from 'components';
 
 class PaintMain extends React.Component {
   constructor(props) {
@@ -19,6 +19,7 @@ class PaintMain extends React.Component {
           <div className="col s12 l4">
             <div className="panel z-depth-1">
               <PanelHeader title="Tools"/>
+              <CanvasTools />
             </div>
           </div>
         </div>

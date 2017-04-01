@@ -1,0 +1,69 @@
+.canvas-tools-wrapper {
+  padding: 10px;
+
+  .colors {
+    clear: both;
+
+    .color-preview-wrapper {
+      width: 46px;
+      height: 46px;
+      float: left;
+
+      .color-preview {
+        width: 40px;
+        height: 40px;
+        border-radius: 99px;
+        margin: 3px 5px 5px 3px;
+
+        &:hover {
+          width: 46px;
+          height: 46px;
+          margin-top: 0;
+          margin-left: 0;
+          position: absolute;
+          transition: all 0.3s;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .widths {
+    margin-top: 15px;
+
+    &-list {
+      width: 70%;
+      float: left;
+
+      .width-preview-wrapper {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        height: 20px;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        .width-preview {
+          width: 100%;
+          background-color: black;
+          border-radius: 99px;
+        }
+      }
+    }
+
+    &-selected {
+      width: 30%;
+      float: left;
+
+      .selected {
+        width: 20px;
+        height: 20px;
+        margin: 5px auto;
+        border-radius: 99px;
+        background-color: @flat-ui-black-hole;
+        color: @flat-ui-silver;
+      }
+    }
+  }
+}

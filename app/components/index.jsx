@@ -10,6 +10,7 @@ import SubheaderBar from './SubheaderBar';
 import DrawerMenu from './DrawerMenu';
 import PanelHeader from './PanelHeader';
 import Canvas from './Canvas';
+import CanvasTools from './CanvasTools';
 
 export {
   Title,
@@ -28,5 +29,6 @@ export {
   SubheaderBar,
   DrawerMenu,
   Canvas,
+  CanvasTools,
   PanelHeader
 };

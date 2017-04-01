@@ -1,6 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-class Canvas extends React.Component {
+class CanvasComponent extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -10,7 +11,7 @@ class Canvas extends React.Component {
       x: 0,
       y: 0
     };
-    
+
     let canvas_wrapper = document.getElementById('canvas_wrapper');
     let paint_style = getComputedStyle(canvas_wrapper);
 
@@ -61,9 +62,19 @@ class Canvas extends React.Component {
   }
 }
 
-Canvas.defaultProps = {
+CanvasComponent.defaultProps = {
   width: '450',
   height: '450'
 };
+
+const mapStateToProps = state => {
+  console.log(state);
+  return {config: state.canvas.config};
+};
+const mapDispatchToProps = dispatch => {
+  return {};
+}
+
+var Canvas = connect(mapStateToProps, mapDispatchToProps)(CanvasComponent);
 
 export default Canvas;

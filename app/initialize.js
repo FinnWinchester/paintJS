@@ -15,7 +15,43 @@ import {Router, Route, browserHistory, IndexRoute} from 'react-router';
 // const store = createStore(counterApp, module.hot && module.hot.data && module.hot.data.counter || 0);
 // let store = createStore(myApp, {count: 0});
 let store = createStore(myApp, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-store.dispatch({type: 'INIT'});
+store.dispatch({
+  type: 'INIT',
+  data: {
+    'canvas': {
+      'config': {
+        'selected_color': '',
+        'selected_width': 5
+      },
+      'tools': {
+        'colors': [
+          '#12A5CC',
+          '#F73E2C',
+          '#F5015E',
+          '#9A05AA',
+          '#572391',
+          '#3C4AB2',
+          '#45B052',
+          '#009788',
+          '#01BBD4',
+          '#00A4F4',
+          '#0F90F2',
+          '#88C648',
+          '#CDDC3D',
+          '#FEEE37',
+          '#FEC224',
+          '#F99B18',
+          '#000000',
+          '#5F7C8C',
+          '#9D9D9D',
+          '#785548',
+          '#FF530C'
+        ],
+        'widths': [1, 2, 4, 6]
+      }
+    }
+  }
+});
 
 if (module.hot) {
   module.hot.accept('./reducers', () => {
