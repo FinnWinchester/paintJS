@@ -1,7 +1,5 @@
 # PaintJS with Brunch + Redux + React + Babel/ES6
 
-[Online demo](https://finnwinchester.github.io/paintJS/).
-
 ## Installation
 
 1. Install brunch globally `npm install -g brunch`
