@@ -16,11 +16,6 @@ let HeaderBarComponent = ({count, onPlusClick, onMinusClick}) => (
         </Link>
         <ul id="nav-mobile" className="left hide-on-med-and-down">
           <li>
-            <a href="javascript:;" data-activates="slide-out" className="toggle-drawer">
-              <i className="material-icons">menu</i>
-            </a>
-          </li>
-          <li>
             <Link to="/home" activeClassName="active-link">Home</Link>
           </li>
           <li>
