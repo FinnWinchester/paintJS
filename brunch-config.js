@@ -8,6 +8,10 @@ exports.files = {
   }
 };
 
+exports.paths = {
+  public: 'docs/'
+};
+
 exports.plugins = {
   babel: {
     presets: ['latest', 'react']
