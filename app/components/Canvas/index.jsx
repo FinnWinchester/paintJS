@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import storeCanvasDrawing from 'actions/CanvasStoreDrawing';
 
 class CanvasComponent extends React.Component {
   constructor(props) {
@@ -124,14 +125,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    storeDrawing: (coords, color, width) => dispatch({
-      type: 'CANVAS_DRAWING_STORE',
-      data: {
-        coords,
-        color,
-        width
-      }
-    })
+    storeDrawing: (coords, color, width) => dispatch(storeCanvasDrawing(coords, color, width))
   };
 }
 

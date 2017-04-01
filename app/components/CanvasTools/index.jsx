@@ -1,6 +1,9 @@
-
 import React from 'react';
 import {connect} from 'react-redux';
+import canvasUndo from 'actions/CanvasUndo';
+import canvasRedo from 'actions/CanvasRedo';
+import canvasPickColor from 'actions/CanvasPickColor';
+import canvasPickWidth from 'actions/CanvasPickWidth';
 
 class CanvasToolsComponent extends React.Component {
   constructor(props) {
@@ -96,20 +99,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    selectWidth: width => dispatch({
-      type: 'CANVAS_SELECT_WIDTH',
-      data: {
-        width: width
-      }
-    }),
-    selectColor: color => dispatch({
-      type: 'CANVAS_SELECT_COLOR',
-      data: {
-        color: color
-      }
-    }),
-    undo: color => dispatch({type: 'CANVAS_DRAWING_UNDO', data: {}}),
-    redo: color => dispatch({type: 'CANVAS_DRAWING_REDO', data: {}})
+    selectWidth: width => dispatch(canvasPickWidth(width)),
+    selectColor: color => dispatch(canvasPickColor(color)),
+    undo: color => dispatch(canvasUndo()),
+    redo: color => dispatch(canvasRedo())
   };
 }
 
