@@ -4,9 +4,21 @@ import {connect} from 'react-redux';
 class CanvasComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      canvas: false,
+      ctx: false
+    };
+  }
+
+  componentWillReceiveProps(nextProps, nextState) {
+    // Here we get the new props 'color' and 'width'.
+    this.state.ctx.lineWidth = nextProps.selected_width;
+    this.state.ctx.strokeStyle = nextProps.selected_color;
   }
 
   componentDidMount() {
+    let _state = this.state;
+
     let mouse = {
       x: 0,
       y: 0
@@ -15,36 +27,36 @@ class CanvasComponent extends React.Component {
     let canvas_wrapper = document.getElementById('canvas_wrapper');
     let paint_style = getComputedStyle(canvas_wrapper);
 
-    let canvas = document.getElementById('canvas');
-    canvas.width = parseInt(this.props.width);
-    canvas.height = parseInt(this.props.height);
+    _state.canvas = document.getElementById('canvas');
+    _state.canvas.width = parseInt(this.props.width);
+    _state.canvas.height = parseInt(this.props.height);
 
-    let ctx = canvas.getContext('2d');
+    _state.ctx = _state.canvas.getContext('2d');
 
     let onPaint = function() {
-      ctx.lineTo(mouse.x, mouse.y);
-      ctx.stroke();
+      _state.ctx.lineTo(mouse.x, mouse.y);
+      _state.ctx.stroke();
     };
 
-    canvas.addEventListener('mousemove', function(e) {
+    _state.canvas.addEventListener('mousemove', function(e) {
       mouse.x = e.offsetX;
       mouse.y = e.offsetY;
     }, false);
 
-    ctx.lineWidth = 5;
-    ctx.lineJoin = 'round';
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = '#12A5CC';
+    _state.ctx.lineWidth = this.props.selected_width;
+    _state.ctx.lineJoin = 'round';
+    _state.ctx.lineCap = 'round';
+    _state.ctx.strokeStyle = this.props.selected_color;
 
-    canvas.addEventListener('mousedown', function(e) {
-      ctx.beginPath();
-      ctx.moveTo(mouse.x, mouse.y);
+    _state.canvas.addEventListener('mousedown', function(e) {
+      _state.ctx.beginPath();
+      _state.ctx.moveTo(mouse.x, mouse.y);
 
-      canvas.addEventListener('mousemove', onPaint, false);
+      _state.canvas.addEventListener('mousemove', onPaint, false);
     }, false);
 
-    canvas.addEventListener('mouseup', function() {
-      canvas.removeEventListener('mousemove', onPaint, false);
+    _state.canvas.addEventListener('mouseup', function() {
+      _state.canvas.removeEventListener('mousemove', onPaint, false);
     }, false);
   }
 
@@ -68,7 +80,7 @@ CanvasComponent.defaultProps = {
 };
 
 const mapStateToProps = state => {
-  return {config: state.canvas.config};
+  return {selected_color: state.canvas.config.selected_color, selected_width: state.canvas.config.selected_width};
 };
 const mapDispatchToProps = dispatch => {
   return {};

@@ -20,8 +20,8 @@ store.dispatch({
   data: {
     'canvas': {
       'config': {
-        'selected_color': '',
-        'selected_width': 5
+        'selected_color': 'black',
+        'selected_width': 1
       },
       'tools': {
         'colors': [

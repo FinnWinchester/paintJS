@@ -8,7 +8,6 @@ class CanvasToolsComponent extends React.Component {
 
   render() {
     let props = this.props;
-    console.log(props);
 
     return (
       <div className='canvas-tools-wrapper'>
