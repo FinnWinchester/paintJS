@@ -69,13 +69,15 @@
       width: 30%;
       float: left;
 
-      .selected {
+      .bullet {
         width: 20px;
         height: 20px;
         margin: 5px auto;
         border-radius: 99px;
-        background-color: @flat-ui-black-hole;
-        color: @flat-ui-silver;
+
+        &.selected {
+          background-color: @flat-ui-black-hole;
+        }
       }
     }
   }

@@ -64,7 +64,7 @@ class CanvasToolsComponent extends React.Component {
               let selected = props.selected_width === e;
 
               return (
-                <div className={selected && 'selected'} key={e}></div>
+                <div className={'bullet' + (selected ? ' selected' : '')} key={e}></div>
               )
             })}
             <br className='clear-fix'/>
