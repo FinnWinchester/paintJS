@@ -29672,20 +29672,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var store = (0, _redux.createStore)(_reducers2.default, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 store.dispatch({
   type: 'INIT',
-  data: {
-    'canvas': {
-      'config': {
-        'selected_color': '#000000',
-        'selected_width': 1,
-        'history': [],
-        'deleted': []
-      },
-      'tools': {
-        'colors': ['#F73E2C', '#F5015E', '#9A05AA', '#572391', '#3C4AB2', '#45B052', '#009788', '#01BBD4', '#00A4F4', '#0F90F2', '#88C648', '#CDDC3D', '#FEEE37', '#FEC224', '#F99B18', '#000000', '#5F7C8C', '#9D9D9D', '#785548', '#FF530C'],
-        'widths': [1, 2, 4, 6]
-      }
-    }
-  }
+  data: false
 });
 
 if (module.hot) {
@@ -29748,8 +29735,21 @@ exports.default = function () {
 
   switch (action.type) {
     case 'INIT':
-      newState = action.data;
-      newState.canvas.repaint = false;
+      newState = Object.assign({}, {
+        'canvas': {
+          'repaint': false,
+          'config': {
+            'selected_color': '#000000',
+            'selected_width': 1,
+            'history': [],
+            'deleted': []
+          },
+          'tools': {
+            'colors': ['#F73E2C', '#F5015E', '#9A05AA', '#572391', '#3C4AB2', '#45B052', '#009788', '#01BBD4', '#00A4F4', '#0F90F2', '#88C648', '#CDDC3D', '#FEEE37', '#FEC224', '#F99B18', '#000000', '#5F7C8C', '#9D9D9D', '#785548', '#FF530C'],
+            'widths': [1, 2, 4, 6]
+          }
+        }
+      });
       break;
     case 'CANVAS_SELECT_COLOR':
       newState.canvas.repaint = false;
