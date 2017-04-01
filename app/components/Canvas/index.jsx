@@ -12,12 +12,35 @@ class CanvasComponent extends React.Component {
     };
   }
 
+  // Here we get the new props 'color' and 'width'.
   componentWillReceiveProps(nextProps, nextState) {
-    // Here we get the new props 'color' and 'width'.
     let _state = this.state;
 
-    this.state.ctx.lineWidth = nextProps.selected_width;
-    this.state.ctx.strokeStyle = nextProps.selected_color;
+    _state.ctx.lineWidth = nextProps.selected_width;
+    _state.ctx.strokeStyle = nextProps.selected_color;
+
+    if (nextProps.repaint) {
+      // First we clear the canvas.
+      _state.ctx.clearRect(0, 0, parseInt(nextProps.width), parseInt(nextProps.height));
+
+      // First we check whether we have points to draw or not.
+      if (nextProps.history.length > 0) {
+
+        nextProps.history.map(eachHistory => {
+          _state.ctx.lineWidth = eachHistory.width;
+          _state.ctx.strokeStyle = eachHistory.color;
+
+          // Move cursor to first coord.
+          _state.ctx.beginPath();
+          _state.ctx.moveTo(eachHistory.coords[0].x, eachHistory.coords[0].y);
+
+          eachHistory.coords.map(eachCoord => {
+            _state.ctx.lineTo(eachCoord.x, eachCoord.y);
+            _state.ctx.stroke();
+          })
+        });
+      }
+    }
   }
 
   componentDidMount() {
@@ -50,7 +73,6 @@ class CanvasComponent extends React.Component {
     _state.canvas.addEventListener('mousemove', function(e) {
       mouse.x = e.offsetX;
       mouse.y = e.offsetY;
-      // coords.push(Object.assign({}, mouse, {index: coords.length}));
     }, false);
 
     // Setup width and color
@@ -71,7 +93,7 @@ class CanvasComponent extends React.Component {
     _state.canvas.addEventListener('mouseup', function() {
       painting = false;
       let hasCoords = coords.length > 0;
-      hasCoords && _props.storeDrawing(coords, _state.ctx.strokeStyle);
+      hasCoords && _props.storeDrawing(coords, _state.ctx.strokeStyle, _state.ctx.lineWidth);
       _state.canvas.removeEventListener('mousemove', onPaint, false);
     }, false);
   }
@@ -96,16 +118,18 @@ CanvasComponent.defaultProps = {
 };
 
 const mapStateToProps = state => {
-  return {selected_color: state.canvas.config.selected_color, selected_width: state.canvas.config.selected_width, history: state.canvas.config.history};
+  // unique_id is needed because the new state's history won't hear about his length change.
+  return {selected_color: state.canvas.config.selected_color, selected_width: state.canvas.config.selected_width, history: state.canvas.config.history, repaint: state.canvas.repaint, unique_id: state.canvas.config.history.length};
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    storeDrawing: (coords, color) => dispatch({
+    storeDrawing: (coords, color, width) => dispatch({
       type: 'CANVAS_DRAWING_STORE',
       data: {
         coords,
-        color
+        color,
+        width
       }
     })
   };
