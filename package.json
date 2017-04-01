@@ -8,7 +8,7 @@
   "scripts": {
     "start": "brunch watch --server",
     "build": "brunch build --production",
-    "test": "mocha tests/"
+    "test": "jest tests/"
   },
   "dependencies": {
     "react": "^15.4.2",
@@ -19,13 +19,15 @@
   },
   "devDependencies": {
     "auto-reload-brunch": "^2",
-    "hmr-brunch": "^0.1",
     "babel-brunch": "~6.0.0",
+    "babel-jest": "^19.0.0",
     "babel-preset-latest": "^6",
     "babel-preset-react": "~6.22",
     "brunch": "^2",
     "clean-css-brunch": "^2",
-    "uglify-js-brunch": "^2",
-    "less-brunch": "^2.10.0"
+    "hmr-brunch": "^0.1",
+    "jest": "^19.0.2",
+    "less-brunch": "^2.10.0",
+    "uglify-js-brunch": "^2"
   }
 }

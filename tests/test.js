@@ -1,8 +1,29 @@
-var assert = require('assert');
-describe('Array', function() {
-  describe('#indexOf()', function() {
-    it('should return -1 when the value is not present', function() {
-      assert.equal(-1, [1, 2, 3].indexOf(4));
-    });
-  });
-});
+var dispatchStuff = (coords, color, width) => (
+  {
+    type: 'CANVAS_DRAWING_STORE',
+    data: {
+      coords,
+      color,
+      width
+    }
+  }
+);
+
+describe('actions', () => {
+  it('should create an action to store a line', () => {
+    const coords = [15, 15]
+    const width = 1
+    const color = 'red'
+
+    const expectedAction = {
+      type: 'CANVAS_DRAWING_STORE',
+      data: {
+        coords,
+        color,
+        width
+      }
+    };
+
+    expect(dispatchStuff(coords, color, width)).toEqual(expectedAction);
+  })
+})
