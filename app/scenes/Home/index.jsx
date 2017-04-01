@@ -14,12 +14,4 @@ class HomeComponent extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {};
-};
-const mapDispatchToProps = dispatch => {
-  return {};
-}
-
-var Home = connect(mapStateToProps, mapDispatchToProps)(HomeComponent);
-export default Home;
+export default HomeComponent;

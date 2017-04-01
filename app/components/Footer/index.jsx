@@ -1,13 +1,6 @@
-import React, {PropTypes} from 'react';
-import {Link} from 'react-router';
-import {connect} from 'react-redux';
-import {Title, Input} from 'components';
+import React from 'react';
 
-const style = {
-  width: '55px'
-};
-
-let FooterComponent = ({count, onPlusClick, onMinusClick}) => (
+let FooterComponent = () => (
   <footer className="page-footer">
     <div className="container">
       <div className="row">
@@ -43,20 +36,4 @@ let FooterComponent = ({count, onPlusClick, onMinusClick}) => (
   </footer>
 );
 
-FooterComponent.propTypes = {
-  onPlusClick: PropTypes.func.isRequired,
-  onMinusClick: PropTypes.func.isRequired
-};
-
-const mapStateToProps = state => {
-  return {count: state.count};
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    onPlusClick: () => dispatch({type: 'INCREMENT'}),
-    onMinusClick: () => dispatch({type: 'DECREMENT'})
-  };
-}
-
-var Footer = connect(mapStateToProps, mapDispatchToProps)(FooterComponent);
-export default Footer;
+export default FooterComponent;
