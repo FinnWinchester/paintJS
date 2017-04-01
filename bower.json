@@ -1,0 +1,19 @@
+{
+  "name": "react-redux-minigame",
+  "description": "Minigame with ReactJS+Redux",
+  "main": "",
+  "authors": [
+    "Finn Winchester"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {}
+}
