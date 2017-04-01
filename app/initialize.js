@@ -6,7 +6,7 @@ import myApp from './reducers';
 
 import MainLayout from 'scenes/MainLayout';
 import Home from 'scenes/Home';
-import {HomeMain, HomeAlter, HomeOther} from 'scenes/Home/scenes';
+import {HomeMain} from 'scenes/Home/scenes';
 import Paint from 'scenes/Paint';
 import {PaintMain} from 'scenes/Paint/scenes';
 import NotFound from 'scenes/NotFound';
@@ -82,10 +82,7 @@ const load = () => {
     <Router history={browserHistory}>
       <Route path="/" onChange={onUrlChange} component={MainLayout}>
         <IndexRoute component={Home}></IndexRoute>
-        <Route path="home" activeClassName="active-link" component={Home}>
-          <Route path="alter" activeClassName="active-link" component={HomeAlter}></Route>
-          <Route path="other" activeClassName="active-link" component={HomeOther}></Route>
-        </Route>
+        <Route path="home" activeClassName="active-link" component={Home}></Route>
         <Route path="Paint" activeClassName="active-link" component={Paint}>
           <IndexRoute component={PaintMain}></IndexRoute>
         </Route>
