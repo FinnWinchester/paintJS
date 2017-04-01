@@ -18,7 +18,8 @@ class CanvasComponent extends React.Component {
 
   componentDidMount() {
     let _state = this.state;
-
+    let _props = this.props;
+    let coords = [];
     let mouse = {
       x: 0,
       y: 0
@@ -41,21 +42,25 @@ class CanvasComponent extends React.Component {
     _state.canvas.addEventListener('mousemove', function(e) {
       mouse.x = e.offsetX;
       mouse.y = e.offsetY;
+      // coords.push(Object.assign({}, mouse, {index: coords.length}));
     }, false);
 
+    // Setup width and color
     _state.ctx.lineWidth = this.props.selected_width;
-    _state.ctx.lineJoin = 'round';
-    _state.ctx.lineCap = 'round';
     _state.ctx.strokeStyle = this.props.selected_color;
 
+    // Start drawing
     _state.canvas.addEventListener('mousedown', function(e) {
+      coords = [];
       _state.ctx.beginPath();
       _state.ctx.moveTo(mouse.x, mouse.y);
 
       _state.canvas.addEventListener('mousemove', onPaint, false);
     }, false);
 
+    // Finish drawing
     _state.canvas.addEventListener('mouseup', function() {
+      // _props.storeDrawing(_state.coords);
       _state.canvas.removeEventListener('mousemove', onPaint, false);
     }, false);
   }
@@ -82,8 +87,11 @@ CanvasComponent.defaultProps = {
 const mapStateToProps = state => {
   return {selected_color: state.canvas.config.selected_color, selected_width: state.canvas.config.selected_width};
 };
+
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    storeDrawing: coords => dispatch({type: 'CANVAS_DRAWING_STORE', data: coords})
+  };
 }
 
 var Canvas = connect(mapStateToProps, mapDispatchToProps)(CanvasComponent);
