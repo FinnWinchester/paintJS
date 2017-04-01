@@ -25,7 +25,6 @@ store.dispatch({
       },
       'tools': {
         'colors': [
-          '#12A5CC',
           '#F73E2C',
           '#F5015E',
           '#9A05AA',

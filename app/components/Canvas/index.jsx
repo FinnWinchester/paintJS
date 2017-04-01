@@ -68,7 +68,6 @@ CanvasComponent.defaultProps = {
 };
 
 const mapStateToProps = state => {
-  console.log(state);
   return {config: state.canvas.config};
 };
 const mapDispatchToProps = dispatch => {

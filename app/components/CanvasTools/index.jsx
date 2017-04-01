@@ -7,17 +7,28 @@ class CanvasToolsComponent extends React.Component {
   }
 
   render() {
+    let props = this.props;
+    console.log(props);
+
     return (
       <div className='canvas-tools-wrapper'>
         <div className='colors'>
-          {this.props.config.colors.map(e => {
+          {props.tools.colors.map(e => {
             let style = {
               backgroundColor: e
             };
 
+            let selectCanvasColor = function() {
+              props.selectColor(e);
+            };
+
+            let selected = props.selected_color === e;
+
             return (
-              <div className='color-preview-wrapper' key={e}>
-                <div className='color-preview' style={style}></div>
+              <div className='color-preview-wrapper' key={e} onClick={selectCanvasColor}>
+                <div className='color-preview' style={style}>
+                  {selected && <div className='inner-icon valign-wrapper' dangerouslySetInnerHTML={{__html: '<i class="fa fa-check valign"></i>'}}></div>}
+                </div>
               </div>
             )
           })}
@@ -26,13 +37,17 @@ class CanvasToolsComponent extends React.Component {
 
         <div className='widths'>
           <div className='widths-list'>
-            {this.props.config.widths.map(e => {
+            {props.tools.widths.map(e => {
               let style = {
                 height: e
               };
 
+              let selectCanvasWidth = function() {
+                props.selectWidth(e);
+              };
+
               return (
-                <div className='width-preview-wrapper valign-wrapper' key={e}>
+                <div className='width-preview-wrapper valign-wrapper' key={e} onClick={selectCanvasWidth}>
                   <div className='width-preview valign' style={style}></div>
                 </div>
               )
@@ -41,12 +56,12 @@ class CanvasToolsComponent extends React.Component {
           </div>
 
           <div className='widths-selected'>
-            {this.props.config.widths.map(e => {
+            {props.tools.widths.map(e => {
               let style = {
                 height: e
               };
 
-              let selected = false;
+              let selected = props.selected_width === e;
 
               return (
                 <div className={selected && 'selected'} key={e}></div>
@@ -62,10 +77,24 @@ class CanvasToolsComponent extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {config: state.canvas.tools};
+  return {tools: state.canvas.tools, selected_color: state.canvas.config.selected_color, selected_width: state.canvas.config.selected_width};
 };
+
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    selectWidth: width => dispatch({
+      type: 'CANVAS_SELECT_WIDTH',
+      data: {
+        width: width
+      }
+    }),
+    selectColor: color => dispatch({
+      type: 'CANVAS_SELECT_COLOR',
+      data: {
+        color: color
+      }
+    })
+  };
 }
 
 var CanvasTools = connect(mapStateToProps, mapDispatchToProps)(CanvasToolsComponent);
