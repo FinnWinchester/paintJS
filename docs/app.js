@@ -28607,8 +28607,8 @@ function canvasRedo() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = storeCanvasDrawing;
-function storeCanvasDrawing(coords, color, width) {
+exports.default = canvasStoreDrawing;
+function canvasStoreDrawing(coords, color, width) {
   return {
     type: 'CANVAS_DRAWING_STORE',
     data: {
