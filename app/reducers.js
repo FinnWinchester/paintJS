@@ -16,6 +16,7 @@ export default (state = {}, action) => {
       break;
     case 'CANVAS_DRAWING_STORE':
       newState.canvas.repaint = false;
+      newState.canvas.config.deleted = [];
       newState.canvas.config.history.push(action.data);
       break;
     case 'CANVAS_DRAWING_UNDO':
