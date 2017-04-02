@@ -17,6 +17,11 @@ let HeaderBarComponent = () => (
             <Link to="/paint" activeClassName="active-link">Paint</Link>
           </li>
         </ul>
+        <ul id="nav-mobile" className="right hide-on-med-and-down">
+          <li>
+            <a href="https://github.com/FinnWinchester/paintJS" target="_blank">Fork me on GitHub!</a>
+          </li>
+        </ul>
       </div>
       <DrawerMenu/>
     </nav>
