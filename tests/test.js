@@ -22,6 +22,8 @@ describe('actions', () => {
     };
 
 
+
+
     expect(canvasStoreDrawing(coords, color, width)).toEqual(expectedAction);
   });
 
